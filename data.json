@@ -1,0 +1,92 @@
+[
+  {
+    "email": "sergeytrenerbelov@gmail.com",
+    "date": "2023-12-01T10:30:00Z",
+    "shapeRingsValues": [
+      {
+        "weight": 80,
+        "waist": 90,
+        "leftHip": 100,
+        "rightHip": 100,
+        "chest": 95,
+        "neck": 40,
+        "leftBiceps": 35,
+        "rightBiceps": 35,
+        "leftCalve": 40,
+        "rightCalve": 40
+      }
+    ]
+  },
+  {
+    "email": "sergeytrenerbelov@gmail.com",
+    "date": "2024-01-15T08:15:00Z",
+    "shapeRingsValues": [
+      {
+        "weight": 82,
+        "waist": 88,
+        "leftHip": 101,
+        "rightHip": 101,
+        "chest": 96,
+        "neck": 41,
+        "leftBiceps": 36,
+        "rightBiceps": 36,
+        "leftCalve": 41,
+        "rightCalve": 41
+      }
+    ]
+  },
+  {
+    "email": "sergeytrenerbelov@gmail.com",
+    "date": "2024-03-20T14:45:00Z",
+    "shapeRingsValues": [
+      {
+        "weight": 78,
+        "waist": 87,
+        "leftHip": 99,
+        "rightHip": 99,
+        "chest": 94,
+        "neck": 40,
+        "leftBiceps": 34,
+        "rightBiceps": 34,
+        "leftCalve": 39,
+        "rightCalve": 39
+      }
+    ]
+  },
+  {
+    "email": "sergeytrenerbelov@gmail.com",
+    "date": "2024-05-10T18:00:00Z",
+    "shapeRingsValues": [
+      {
+        "weight": 79,
+        "waist": 86,
+        "leftHip": 98,
+        "rightHip": 98,
+        "chest": 93,
+        "neck": 39,
+        "leftBiceps": 33,
+        "rightBiceps": 33,
+        "leftCalve": 38,
+        "rightCalve": 38
+      }
+    ]
+  },
+  {
+    "email": "sergeytrenerbelov@gmail.com",
+    "date": "2024-07-25T09:30:00Z",
+    "shapeRingsValues": [
+      {
+        "weight": 81,
+        "waist": 89,
+        "leftHip": 100,
+        "rightHip": 100,
+        "chest": 95,
+        "neck": 40,
+        "leftBiceps": 35,
+        "rightBiceps": 35,
+        "leftCalve": 40,
+        "rightCalve": 40
+      }
+    ]
+  }
+]
