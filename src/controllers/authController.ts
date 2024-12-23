@@ -3,16 +3,47 @@ import userService from "../services/userService";
 import { IUser } from "../types/userType";
 import { UserDto } from "../dto/userdto";
 import tokenService from "../services/tokenService";
+import { FinishRegistrationData } from "../types/finishRegistrationTypes";
+import ApiError from "../exeptions/apiError";
 
 class AuthController {
-  loginWithCredentials = async (
+  isRegistrationComplited = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const { name, email, password } = req.body;
-    console.log(name, email, password);
-    res.json("jopa");
+    try {
+      const body = req.body as { email?: string };
+
+      if (!body.email) {
+        throw ApiError.BadRequest("Email is required");
+      }
+
+      const { dateOfBirdth, gender } = await userService.findValidUser(
+        body.email
+      );
+
+      if (!dateOfBirdth || !gender) {
+        throw ApiError.BadRequest("Bad request");
+      }
+      res.status(200).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  finishRegistration = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { postData, email }: FinishRegistrationData = req.body;
+      await userService.finishRegistration({ postData, email });
+      res.status(200).send();
+    } catch (error) {
+      next(error);
+    }
   };
 
   loginWithGoogle = async (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +55,7 @@ class AuthController {
       await tokenService.saveToken(authData.user, authData.token);
       res.json({ usedto });
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   };
 }

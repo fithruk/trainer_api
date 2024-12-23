@@ -10,8 +10,18 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  password: {
+  dateOfBirdth: {
+    type: Date,
+    validate: {
+      validator: function (value: Date) {
+        return value <= new Date();
+      },
+      message: "Date of birth cannot be in the future",
+    },
+  },
+  gender: {
     type: String,
+    enum: ["Male", "Female"],
   },
 });
 
