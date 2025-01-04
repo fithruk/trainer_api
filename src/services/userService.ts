@@ -32,6 +32,7 @@ class UserService implements IUserService {
 
   findValidUser = async (email: string) => {
     const candidate = await userModel.findOne({ email });
+
     if (!candidate) {
       throw ApiError.BadRequest("User does noy exist");
     }

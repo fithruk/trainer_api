@@ -9,7 +9,7 @@ class BodyShapeValueError extends Error {
   }
 
   static noDataAvailableError = () => {
-    return new BodyShapeValueError(204, "No data found");
+    return new BodyShapeValueError(202, "No data found");
   };
 }
 

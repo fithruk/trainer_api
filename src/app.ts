@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import authRouter from "./routers/authRouter";
 import foodRouter from "./routers/foodTabbleRouter";
+import userRouter from "./routers/userRouter";
 import bodyShapeRouter from "./routers/bodyShapeRouter";
 import mongoose from "mongoose";
 import { errorMidlleware } from "./midllewares/errorMidlleware";
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use("/auth", authRouter);
 app.use("/foods", foodRouter);
 app.use("/bodyShape", bodyShapeRouter);
+app.use("/users", userRouter);
 app.use(errorMidlleware);
 
 const start = async () => {

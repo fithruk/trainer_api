@@ -1,12 +1,12 @@
 import { Router } from "express";
-import bodyShapeComtroller from "../controllers/bodyShapeController";
+import userController from "../controllers/userController";
 import { authMidlleware } from "../midllewares/authMidllware";
 const router = Router();
 
 router.get(
-  "/getCurrentBodyShapeValuesByEmail/:email",
+  "/getUserByEmail/:email",
   authMidlleware,
-  bodyShapeComtroller.getBodyShapeValuesByEmail
+  userController.getUserByEmail
 );
 // router.get(
 //   "/getUserByEmail/:email",

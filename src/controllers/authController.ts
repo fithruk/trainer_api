@@ -5,6 +5,7 @@ import { UserDto } from "../dto/userdto";
 import tokenService from "../services/tokenService";
 import { FinishRegistrationData } from "../types/finishRegistrationTypes";
 import ApiError from "../exeptions/apiError";
+import BodyShapeValueError from "../exeptions/bodyShapeValueError";
 
 class AuthController {
   isRegistrationComplited = async (
@@ -24,7 +25,7 @@ class AuthController {
       );
 
       if (!dateOfBirdth || !gender) {
-        throw ApiError.BadRequest("Bad request");
+        throw BodyShapeValueError.noDataAvailableError();
       }
       res.status(200).send();
     } catch (error) {
