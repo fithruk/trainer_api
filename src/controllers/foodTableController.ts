@@ -1,10 +1,10 @@
-import recipeModel from "../models/recipeModel";
 import { Request, Response, NextFunction } from "express";
+import foodService from "../services/foodService";
 
 class FoodTableController {
   getAllFoods = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const allFoods = await recipeModel.find();
+      const allFoods = await foodService.getAllFoods();
       res.status(200).json(allFoods);
     } catch (error) {
       console.log(error);
@@ -16,11 +16,19 @@ class FoodTableController {
     console.log(id + "_id");
 
     try {
-      const recipe = await recipeModel.findById(id);
+      const recipe = await foodService.getFoodById(id);
       res.status(200).json(recipe);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  saveUserFoodPlan = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    res.send();
   };
 }
 

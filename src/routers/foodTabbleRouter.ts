@@ -9,6 +9,11 @@ router.get(
   authMidlleware,
   foodTableController.getFoodById
 );
+// router.post(
+//   "/saveUserFoodPlan",
+//   authMidlleware,
+//   foodTableController.saveUserFoodPlan
+// );
 //router.post("/loginWithGoogle", authController.loginWithGoogle);
 
 export default router;
