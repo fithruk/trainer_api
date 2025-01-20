@@ -14,3 +14,16 @@ export interface IRecipe extends Document {
   category: string;
   ingredients: Map<string, string[]>;
 }
+
+export type UserFoodPlanType = Document &
+  Partial<
+    Record<
+      "fats" | "vegetables" | "proteins" | "carbohydrates",
+      | {
+          name: string;
+          grams: number;
+          calories: number;
+        }[]
+      | undefined
+    >
+  >;

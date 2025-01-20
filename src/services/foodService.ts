@@ -1,10 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import recipeModel from "../models/recipeModel";
-import { IRecipe } from "../types/foodTypes";
+import userFoodMenuModel from "../models/userFoodMenuModel";
+import { IRecipe, UserFoodPlanType } from "../types/foodTypes";
 
 interface IFoodService {
   getAllFoods: () => Promise<IRecipe[]>;
   getFoodById: (id: string) => Promise<IRecipe>;
+  saveUserFoodPlan: (
+    email: string,
+    userFoodPlan: UserFoodPlanType
+  ) => Promise<UserFoodPlanType>;
 }
 
 class FoodService implements IFoodService {
@@ -16,6 +21,18 @@ class FoodService implements IFoodService {
   getFoodById = async (id: string) => {
     const recipe = await recipeModel.findById(id).lean();
     return recipe as unknown as IRecipe;
+  };
+
+  saveUserFoodPlan = async (email: string, userFoodPlan: UserFoodPlanType) => {
+    const foodPlan = await userFoodMenuModel.findOne({ email });
+    if (foodPlan) {
+      foodPlan.overwrite(userFoodPlan);
+      await foodPlan.save();
+      return foodPlan;
+    }
+    const newFoodPlan = new userFoodMenuModel(userFoodPlan);
+    await newFoodPlan.save();
+    return newFoodPlan;
   };
 }
 
