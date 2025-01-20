@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import foodService from "../services/foodService";
 import { UserFoodPlanType } from "../types/foodTypes";
+import ApiError from "../exeptions/apiError";
 
 class FoodTableController {
   getAllFoods = async (req: Request, res: Response, next: NextFunction) => {
@@ -34,10 +35,14 @@ class FoodTableController {
         email,
         userFoodPlan,
       }: { email: string; userFoodPlan: UserFoodPlanType } = req.body;
+
       const foodPlan = await foodService.saveUserFoodPlan(email, userFoodPlan);
+
       if (foodPlan) {
-        return res.status(200).json();
+        res.status(200).json();
+        return;
       }
+      next(ApiError.UnauthorizedError());
     } catch (error) {
       next(error);
     }

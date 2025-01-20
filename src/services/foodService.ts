@@ -25,13 +25,18 @@ class FoodService implements IFoodService {
 
   saveUserFoodPlan = async (email: string, userFoodPlan: UserFoodPlanType) => {
     const foodPlan = await userFoodMenuModel.findOne({ email });
+
     if (foodPlan) {
-      foodPlan.overwrite(userFoodPlan);
+      foodPlan.overwrite({ email, ...userFoodPlan });
       await foodPlan.save();
       return foodPlan;
     }
-    const newFoodPlan = new userFoodMenuModel(userFoodPlan);
+    const newFoodPlan = await userFoodMenuModel.create({
+      email,
+      ...userFoodPlan,
+    });
     await newFoodPlan.save();
+
     return newFoodPlan;
   };
 }
