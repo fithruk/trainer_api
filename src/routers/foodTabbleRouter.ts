@@ -9,6 +9,11 @@ router.get(
   authMidlleware,
   foodTableController.getFoodById
 );
+router.get(
+  "/getUserFoodPlan/:email",
+  authMidlleware,
+  foodTableController.getUserFoodPlan
+);
 router.post(
   "/saveUserFoodPlan",
   authMidlleware,

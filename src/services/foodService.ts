@@ -10,6 +10,8 @@ interface IFoodService {
     email: string,
     userFoodPlan: UserFoodPlanType
   ) => Promise<UserFoodPlanType>;
+
+  getUserFoodPlan: (email: string) => Promise<UserFoodPlanType | null>;
 }
 
 class FoodService implements IFoodService {
@@ -38,6 +40,12 @@ class FoodService implements IFoodService {
     await newFoodPlan.save();
 
     return newFoodPlan;
+  };
+
+  getUserFoodPlan = async (email: string) => {
+    const foodPlan = await userFoodMenuModel.findOne({ email });
+
+    return foodPlan;
   };
 }
 

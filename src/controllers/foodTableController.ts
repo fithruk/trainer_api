@@ -47,6 +47,20 @@ class FoodTableController {
       next(error);
     }
   };
+
+  getUserFoodPlan = async (req: Request, res: Response, next: NextFunction) => {
+    const { email } = req.params;
+    try {
+      const foodPlan = await foodService.getUserFoodPlan(email);
+      if (!foodPlan) {
+        next(ApiError.BadRequest("Food plan does not exist."));
+        return;
+      }
+      res.status(200).json(foodPlan);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default new FoodTableController();
