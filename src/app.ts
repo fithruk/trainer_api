@@ -1,15 +1,15 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
 import cookieParser from "cookie-parser";
 import authRouter from "./routers/authRouter";
 import foodRouter from "./routers/foodTabbleRouter";
 import userRouter from "./routers/userRouter";
+import exercisesRouter from "./routers/exercisesRoute";
 import bodyShapeRouter from "./routers/bodyShapeRouter";
 import mongoose from "mongoose";
 import { errorMidlleware } from "./midllewares/errorMidlleware";
-dotenv.config();
-
 const app = express();
 const port = 5000;
 
@@ -29,6 +29,7 @@ app.use("/auth", authRouter);
 app.use("/foods", foodRouter);
 app.use("/bodyShape", bodyShapeRouter);
 app.use("/users", userRouter);
+app.use("/exercises", exercisesRouter);
 app.use(errorMidlleware);
 
 const start = async () => {

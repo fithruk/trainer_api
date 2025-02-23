@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import ApiError from "../exeptions/apiError";
 import BodyShapeValueError from "../exeptions/bodyShapeValueError";
+import { log } from "console";
 
 const errorMidlleware: ErrorRequestHandler = (
   err: Error,
@@ -18,6 +19,8 @@ const errorMidlleware: ErrorRequestHandler = (
     res.status(err.status).json({ message: err.message, errors: err.errors });
     return;
   }
+  console.log(err.message);
+
   res.status(500).json({ message: "Unenpected error" });
   return;
 };
