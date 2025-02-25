@@ -1,4 +1,4 @@
-export type ExerciseType = {
+export type ExerciseShortType = {
   id: string;
   exerciseName: string;
   exerciseMuscleGroup: string;

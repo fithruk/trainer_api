@@ -1,5 +1,5 @@
 import ApiError from "../exeptions/apiError";
-import { ExerciseType } from "../types/exerciseTypes";
+import { ExerciseShortType } from "../types/exerciseTypes";
 import ApiService from "./apiService";
 
 class ExercisesService {
@@ -7,16 +7,21 @@ class ExercisesService {
   private exerciseApi: ApiService = new ApiService(this.exerciseApiURI);
 
   public getAllExercises = async () => {
-    const { data, status } = await this.exerciseApi.get<ExerciseType[]>(
+    let { data, status } = await this.exerciseApi.get<ExerciseShortType[]>(
       "/api/Exercises"
     );
-    if (status === 200) return data;
+    if (status === 200) {
+      data = data.map((ex) => {
+        return { ...ex, exerciseName: ex.exerciseName.replace("\\b", "") };
+      });
+      return data;
+    }
 
     throw ApiError.UnauthorizedError();
   };
 
   public getExerciseByName = async (exerciseName: string) => {
-    const { data, status } = await this.exerciseApi.post<ExerciseType>(
+    const { data, status } = await this.exerciseApi.post<ExerciseShortType>(
       "/api/Exercises/getExerciseByName",
       { exerciseName }
     );
@@ -26,7 +31,7 @@ class ExercisesService {
   };
 
   public getExerisesByEquipment = async (equipment: string) => {
-    const { data, status } = await this.exerciseApi.post<ExerciseType[]>(
+    const { data, status } = await this.exerciseApi.post<ExerciseShortType[]>(
       "/api/Exercises/getExercisesByEquipment",
       { exerciseEquipment: equipment }
     );
@@ -36,7 +41,7 @@ class ExercisesService {
   };
 
   public getExercisesByDifficulty = async (difficulty: string) => {
-    const { data, status } = await this.exerciseApi.post<ExerciseType[]>(
+    const { data, status } = await this.exerciseApi.post<ExerciseShortType[]>(
       "/api/Exercises/getExercisesByDifficulty",
       { exerciseDifficulty: difficulty }
     );
@@ -46,7 +51,7 @@ class ExercisesService {
   };
 
   public getExercisesByMuscleGroupe = async (exerciseMuscleGroupe: string) => {
-    const { data, status } = await this.exerciseApi.post<ExerciseType[]>(
+    const { data, status } = await this.exerciseApi.post<ExerciseShortType[]>(
       "/api/Exercises/getExercisesByMuscleGroupe",
       { exerciseMuscleGroupe: exerciseMuscleGroupe }
     );
