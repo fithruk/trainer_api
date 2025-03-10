@@ -1,5 +1,5 @@
 import ApiError from "../exeptions/apiError";
-import { ExerciseShortType } from "../types/exerciseTypes";
+import { ExerciceFullType, ExerciseShortType } from "../types/exerciseTypes";
 import ApiService from "./apiService";
 
 class ExercisesService {
@@ -21,11 +21,10 @@ class ExercisesService {
   };
 
   public getExerciseByName = async (exerciseName: string) => {
-    const { data, status } = await this.exerciseApi.post<ExerciseShortType>(
-      "/api/Exercises/getExerciseByName",
-      { exerciseName }
-    );
-    if (status === 200) return data;
+    const { data, status } = await this.exerciseApi.post<{
+      exercise: ExerciceFullType;
+    }>("/api/Exercises/getExerciseByName", { exerciseName });
+    if (status === 200) return data.exercise;
 
     throw ApiError.UnauthorizedError();
   };
